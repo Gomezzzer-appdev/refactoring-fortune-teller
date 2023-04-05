@@ -4,9 +4,11 @@ class FortunesController < ApplicationController
  def horoscopes
    
   all_zodiacs = Zodiac.list
-  this_zodiac = all_zodiacs.fetch(:leo)                                 
-  @zodiac_name = params.fetch("the_sign").capitalize
-  @horoscope = this_zodiac.fetch(:horoscope)                                                                                                              
+  selected_sign = params.fetch("the_sign").to_sym
+  this_zodiac = all_zodiacs.fetch(selected_sign)
+  @zodiac_name = this_zodiac.fetch(:name)
+  @horoscope = this_zodiac.fetch(:horoscope)                                  
+                                              
 
   @array_of_numbers = Array.new
 
